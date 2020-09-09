@@ -69,14 +69,15 @@
   </div>
   
 ​
-  <div class = "form-group">
-    <label>Type</label><span class="required">*</span>
-    <input type="string" #type="ngModel"  required pattern="([A-zÀ-ž\s]){1,}"
-    [class.is-invalid]= "type.invalid && type.touched" required class="form-control"
-    placeholder="Car/Bike"  name="type" [(ngModel)]= "vehicleModel.type">
-    <small class="text-danger" [class.d-none]= "type.valid || type.untouched"></small>
-    
-  </div>
+<div class = "form-group">
+  <label>Type</label><span class="required">*</span>
+  <select  required #type="ngModel" [class.is-invalid]="type.invalid && type.touched" class ="custom-select"
+   name="type" type="string" [(ngModel)]="vehicleModel.type">
+      <option value=""selected >Select</option>
+      <option value="Car">Car</option>
+        <option value="Bike">Bike</option>
+  </select>
+</div>
   
   <!-- <div class = "form-group">
     <label>VehicleId</label>
