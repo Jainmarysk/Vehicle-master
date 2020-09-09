@@ -1,0 +1,165 @@
+<header class="header">
+  
+  <h1>ReadyAssist</h1>
+ 
+  </header>
+  <div class = "container">
+    <br>
+    
+  <h2>Vehicle details</h2>
+​
+  <div *ngIf="isCreated"  class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>success</strong> your data is submitted
+    <button (click)="closesubmit()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+​
+  <div *ngIf="isExist" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Sorry</strong> This vehicle Already Exist
+    <button (click)="CloseAlert()"  type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+​
+  <form #vehicleForm="ngForm" (ngSubmit)="onSubmit(vehicleForm.value);vehicleForm.reset()" novalidate>
+​
+      <div class = "form-group">
+        <label>Make</label><span class="required">*</span>
+        <input type="string" #make="ngModel" pattern="([A-zÀ-ž\s]){2,}" required 
+        [class.is-invalid]= "make.invalid && make.touched" required class="form-control"
+        placeholder="Enter vehicle company"  name="make" [(ngModel)]= "vehicleModel.make">
+        <small class="text-danger" [class.d-none]= "make.valid || make.untouched"></small>
+        <div *ngIf="make.errors && (make.invalid || make.touched)">
+          <small  *ngIf = "make.errors.required"></small>
+          <small class ="text-danger" *ngIf = "make.errors.pattern">Please Enter Vehicle Company Name</small>
+          </div>
+      </div>
+    
+  
+  <div class = "form-group">
+    <label>Model</label><span class="required">*</span>
+    <input type="string" #model="ngModel" required pattern="([A-zÀ-ž0-9\s]){1,}"
+    [class.is-invalid]= "model.invalid && model.touched" required class="form-control"
+    placeholder="Enter Vehicle Model"  name="model" [(ngModel)]= "vehicleModel.model">
+    <small class="text-danger" [class.d-none]= "model.valid || model.untouched"></small>
+    
+  </div>
+​
+ 
+  <div class = "form-group">
+    <label>Version</label><span class="required">*</span>
+    <input type="string" #version="ngModel"required pattern="([A-zÀ-ž0-9\s]){1,}"
+    [class.is-invalid]= "version.invalid && version.touched" required class="form-control"
+    placeholder="Enter Vehicle Version"  name="version" [(ngModel)]= "vehicleModel.version">
+    <small class="text-danger" [class.d-none]= "version.valid || version.untouched"></small>
+    
+  </div>
+​
+  <div class = "form-group">
+    <label>CC</label><span class="required">*</span> 
+    <input type = "tel"  #cc="ngModel"  required pattern="([0-9\s]){2,}"
+    [class.is-invalid]= "cc.invalid && cc.touched" required class="form-control" type="string" placeholder="Engine cc"
+    name="cc" [(ngModel)]="vehicleModel.cc">
+    <small class="text-danger" [class.d-none]= "cc.valid || cc.untouched"></small>   
+    <div *ngIf="cc.errors && (cc.invalid || cc.touched)">
+      <small  *ngIf = "cc.errors.required"></small>
+      <small class ="text-danger" *ngIf = "cc.errors.pattern">Please Enter cc is Number</small>
+      </div>
+  </div>
+  
+​
+  <div class = "form-group">
+    <label>Type</label><span class="required">*</span>
+    <input type="string" #type="ngModel"  required pattern="([A-zÀ-ž\s]){1,}"
+    [class.is-invalid]= "type.invalid && type.touched" required class="form-control"
+    placeholder="Car/Bike"  name="type" [(ngModel)]= "vehicleModel.type">
+    <small class="text-danger" [class.d-none]= "type.valid || type.untouched"></small>
+    
+  </div>
+  
+  <!-- <div class = "form-group">
+    <label>VehicleId</label>
+    <select  required #vehicleId="ngModel" [class.is-invalid]="vehicleId.invalid && vehicleId.touched" class ="custom-select" name="vehicleId" type="number" [(ngModel)]="vehicleModel.vehicleId">
+        <option value=""selected >select</option>
+        <option *ngFor="let user of mydata">{{ user.vehicleId }}</option>option>
+   </select>   
+   <small class="text danger"[class.d-none]="vehicleId.valid || vehicleId.untouched" >Please select the option</small>
+  </div> -->
+  <button [disabled]="vehicleForm.form.invalid" type="submit" class="btn btn-success">
+    {{editMode ? 'update' : 'submit'}}
+  </button>
+                         
+  <!-- <input [disabled]="vehicleForm.form.invalid"  type="submit" value="Submit" id="form"> -->
+​
+  </form>
+  </div>
+  <br>
+  <div>
+    <div class= "search-div">
+
+      <mat-form-field class="search-form-field" floatLabel="never">
+          <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+          <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+              <mat-icon>close</mat-icon>
+          </button>
+      </mat-form-field>
+  </div>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+    
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+          <td mat-cell *matCellDef="let data"> {{data.id}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="make">
+          <th mat-header-cell *matHeaderCellDef> Make </th>
+          <td mat-cell *matCellDef="let data"> {{data.make}} </td>
+        </ng-container>
+    
+       
+        <ng-container matColumnDef="model">
+          <th mat-header-cell *matHeaderCellDef> Model </th>
+          <td mat-cell *matCellDef="let data"> {{data.model}} </td>
+        </ng-container>
+    
+      
+        <ng-container matColumnDef="version">
+          <th mat-header-cell *matHeaderCellDef> Version </th>
+          <td mat-cell *matCellDef="let data"> {{data.version}} </td>
+        </ng-container>
+​
+        <ng-container matColumnDef="cc">
+          <th mat-header-cell *matHeaderCellDef> CC </th>
+          <td mat-cell *matCellDef="let data"> {{data.cc}} </td>
+        </ng-container>
+​
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef> Type </th>
+          <td mat-cell *matCellDef="let data"> {{data.type}} </td>
+        </ng-container>
+        
+        
+        <ng-container matColumnDef="isActive">
+          <th mat-header-cell *matHeaderCellDef> isActive </th>
+          
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <mat-cell *matCellDef = "let data">
+          
+          <button style="margin:15px" class="btnn"  (click)="edit(data)"><i class="fa fa-edit" style="font-size:20px;color:rgb(19, 13, 13)"></i>Edit</button>
+          <button style="margin:10px" class="btnnn" (click)="delete(data.id, data.isActive)"><i class="fa fa-trash"></i>delete</button>
+          </mat-cell>
+      </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+    </div>
+    
+  </div>
