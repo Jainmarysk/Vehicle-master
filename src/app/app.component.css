@@ -42,26 +42,25 @@ table{
     width: 32px;
   }
   .btnnn {
-    background-color: rgb(225, 110, 110); /* Blue background */
-    border: none; /* Remove borders */
-    color: rgb(17, 16, 16); /* White text */
-    padding: 5px 10px; /* Some padding */
-    font-size: 16px; /* Set a font size */
-    cursor: pointer; /* Mouse pointer on hover */
+    background-color: rgb(225, 110, 110);
+    border: none; 
+    color: rgb(17, 16, 16);
+    padding: 5px 10px;
+    font-size: 16px; 
+    cursor: pointer; 
   }
   
-  /* Darker background on mouse-over */
   .btnnn:hover {
     background-color: rgb(187, 183, 183);
   }
 
   .btnn {
-    background-color: rgb(231, 233, 134); /* Blue background */
-    border: none; /* Remove borders */
-    color: rgb(17, 16, 16); /* White text */
-    padding: 5px 10px; /* Some padding */
-    font-size: 16px; /* Set a font size */
-    cursor: pointer; /* Mouse pointer on hover */
+    background-color: rgb(231, 233, 134); 
+    border: none; 
+    color: rgb(17, 16, 16);
+    padding: 5px 10px; 
+    font-size: 16px;
+    cursor: pointer; 
   }
   .btnn:hover {
     background-color: rgb(187, 183, 183);
