@@ -105,7 +105,7 @@ onSubmit(a):void{  ​
 ​
 get()
    {
-     return this.http.get<any>('http://localhost:3000/vehicles',request)
+     return this.http.get<any>('http://localhost:3000/api/vehicle-masters',request)
     .subscribe((res:any[])=>{
       console.log(res)
       this.dataSource.data=res
@@ -114,7 +114,7 @@ get()
    }
    delete(id:number,isActive:boolean){
     if(isActive){
-   this.http.patch('http://localhost:3000/vehicles/' +id , {
+   this.http.patch('http://localhost:3000/api/vehicle-masters/' +id , {
      "isActive": false,    
    },request)
    .subscribe((da)=>{
@@ -122,7 +122,7 @@ get()
    })
   }
    else{
-     this.http.patch('http://localhost:3000/vehicles/'+id , {
+     this.http.patch('http://localhost:3000/api/vehicle-masters/'+id , {
      "isActive": true,    
    },request)
    .subscribe((da)=>{
@@ -135,7 +135,7 @@ get()
 update()
   {
     console.log(this.activeindex);
-    return this.http.patch<any>('http://localhost:3000/vehicles/'+this.activeindex,{
+    return this.http.patch<any>('http://localhost:3000/api/vehicle-masters/'+this.activeindex,{
       id:this.activeindex,
       make: this.vehicleModel.make,
       model: this.vehicleModel.model,
