@@ -149,7 +149,8 @@ update()
       this.get();
     })
   }
-edit(obj) {
+edit(obj, isActive:boolean) {
+  if(isActive){
   this.editMode=true;
   console.log(obj);
   this.vehicleForm='Update';
@@ -159,7 +160,7 @@ edit(obj) {
   this.vehicleModel.cc=obj.cc,
   this.vehicleModel.type=obj.type,
   this.activeindex=obj.id;
-}
+}}
 ​
    onSearchClear(){
     this.searchKey="";

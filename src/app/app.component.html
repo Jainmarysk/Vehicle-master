@@ -131,7 +131,7 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef></th>
         <mat-cell *matCellDef = "let data">
-        <button style="margin:15px" class="btnn"  (click)="edit(data)"><i class="fa fa-edit" style="font-size:20px;color:rgb(19, 13, 13)"></i>Edit</button>
+        <button style="margin:15px" class="btnn"  (click)="edit(data, data.isActive)"><i class="fa fa-edit" style="font-size:20px;color:rgb(19, 13, 13)"></i>Edit</button>
         <button style="margin:10px" class="btnnn" (click)="delete(data.id, data.isActive)"><i class="fa fa-trash"></i>delete</button>
         </mat-cell>
       </ng-container>
