@@ -50,7 +50,7 @@ export class AppComponent {
   }
   
   data = [];
-  displayedColumns: string[] = ['id', 'make', 'model', 'version', 'cc', 'type', 'actions'];
+  displayedColumns: string[] = ['id', 'make', 'model', 'version', 'cc', 'type','isActive', 'actions'];
   dataSource = new MatTableDataSource<Vehicledetails>(this.data);
   activeindex=-1;
   user;
