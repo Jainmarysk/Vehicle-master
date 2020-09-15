@@ -7,7 +7,16 @@ import { HttpClient,HttpHeaders} from '@angular/common/http';
 import { MatSort } from '@angular/material/sort';
 import {MatDialog, MatDialogConfig, MAT_DIALOG_DATA} from '@angular/material/dialog';
 ​
-​
+​const header = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Access-Control-Allow-Headers': 'Content-Type',
+  'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUHJhdmVlbiBDaGFrcmF2YXJ0aHkiLCJpZCI6MSwiZW1haWwiOiJwcmF2ZWVuLmNoYWtyYXZhcnRoeUByZWFkeWFzc2lzdC5pbiIsIm1vYmlsZU5vIjoiOTc4OTQ0NzYyOCIsIlJvbGVOYW1lIjoiQWRtaW4iLCJ2ZW5kb3JJZCI6MSwiaWF0IjoxNTk4ODUyNDYwLCJleHAiOjE2MDE0NDQ0NjB9.jOrmeFnBMaYve49vXwJCd-KjVkiMny9tB4Gh-A2Yw3w'
+}
+const request = {                                                                                                                                                                                 
+  headers: new HttpHeaders(header), 
+};
+
 export class Vehicledetails {
   constructor(
    public make: string,
@@ -28,16 +37,11 @@ export class vehicleModel {
   Type: string;
 ​
 }
-const header = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json',
-  'Access-Control-Allow-Headers': 'Content-Type',
-  'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUHJhdmVlbiBDaGFrcmF2YXJ0aHkiLCJpZCI6MSwiZW1haWwiOiJwcmF2ZWVuLmNoYWtyYXZhcnRoeUByZWFkeWFzc2lzdC5pbiIsIm1vYmlsZU5vIjoiOTc4OTQ0NzYyOCIsIlJvbGVOYW1lIjoiQWRtaW4iLCJ2ZW5kb3JJZCI6MSwiaWF0IjoxNTk4ODUyNDYwLCJleHAiOjE2MDE0NDQ0NjB9.jOrmeFnBMaYve49vXwJCd-KjVkiMny9tB4Gh-A2Yw3w'
+
+export class data {
+  isActive:boolean;
 }
-const request = {                                                                                                                                                                                 
-  headers: new HttpHeaders(header), 
-};
-​
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -56,7 +60,7 @@ export class AppComponent {
   user;
   @ViewChild(MatSort ,{static:true}) sort: MatSort;
   @ViewChild(MatPaginator ,{static:true}) paginator: MatPaginator;
-    searchKey:string
+  searchKey:string
 ​
 constructor(private http:HttpClient) {}
 isCreated:boolean=false;
@@ -147,6 +151,7 @@ update()
       this.data=res
       this.editMode=false;
       this.get();
+      this.vehicleForm='submit';
     })
   }
 edit(obj, isActive:boolean) {
